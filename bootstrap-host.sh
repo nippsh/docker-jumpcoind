@@ -46,11 +46,11 @@ fi
 
 # Initialize the data container
 docker volume create --name=bitcoind-data
-docker run -v bitcoind-data:/bitcoin --rm $BTC_IMAGE btc_init
+docker run -v jumpcoind-data:/bitcoin --rm $BTC_IMAGE btc_init
 
 # Start bitcoind via upstart and docker
 curl https://raw.githubusercontent.com/kylemanna/docker-bitcoind/master/upstart.init > /etc/init/docker-bitcoind.conf
-start docker-bitcoind
+start docker-jumpcoind
 
 set +ex
 echo "Resulting bitcoin.conf:"

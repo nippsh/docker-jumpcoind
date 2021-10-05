@@ -16,7 +16,7 @@ RUN apt update \
 
 ARG VERSION=0.21.1
 ARG ARCH=x86_64
-ARG BITCOIN_CORE_SIGNATURE=01EA5486DE18A882D4C2684590C8019E36C2E964
+ARG JUMPCOIN_CORE_SIGNATURE=01EA5486DE18A882D4C2684590C8019E36C2E964
 
 # Don't use base image's bitcoin package for a few reasons:
 # 1. Would need to use ppa/latest repo for the latest release.
@@ -36,18 +36,18 @@ RUN cd /tmp \
     && rm -v /opt/bitcoin/bin/test_bitcoin /opt/bitcoin/bin/bitcoin-qt
 
 FROM ubuntu:latest
-LABEL maintainer="Kyle Manna <kyle@kylemanna.com>"
+LABEL maintainer="nippsh <mail@nipp.sh>"
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-ENV HOME /bitcoin
+ENV HOME /jumpcoin
 EXPOSE 8332 8333
-VOLUME ["/bitcoin/.bitcoin"]
-WORKDIR /bitcoin
+VOLUME ["/jumpcoin/.jumpcoin"]
+WORKDIR /jumpcoin
 
 ARG GROUP_ID=1000
 ARG USER_ID=1000
-RUN groupadd -g ${GROUP_ID} bitcoin \
-    && useradd -u ${USER_ID} -g bitcoin -d /bitcoin bitcoin
+RUN groupadd -g ${GROUP_ID} jumpcoin \
+    && useradd -u ${USER_ID} -g jumpcoin -d /jumpcoin jumpcoin
 
 COPY --from=builder /opt/ /opt/
 
@@ -58,4 +58,4 @@ RUN apt update \
 
 COPY ./bin ./docker-entrypoint.sh /usr/local/bin/
 
-CMD ["btc_oneshot"]
+CMD ["jump_oneshot"]

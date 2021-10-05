@@ -3,13 +3,13 @@ set -e
 
 # Generate the password the first time
 btc_init 2>/dev/null
-eval `grep rpcpassword $HOME/.bitcoin/bitcoin.conf`
+eval `grep rpcpassword $HOME/.jumpcoin/jumpcoin.conf`
 rpcpassword1=$rpcpassword
 
 # Generate the password again
-rm ~/.bitcoin/bitcoin.conf
+rm ~/.jumpcoin/jumpcoin.conf
 btc_init 2>/dev/null
-eval `grep rpcpassword $HOME/.bitcoin/bitcoin.conf`
+eval `grep rpcpassword $HOME/.jumpcoin/jumpcoin.conf`
 rpcpassword2=$rpcpassword
 
 
