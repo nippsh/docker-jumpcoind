@@ -2,7 +2,7 @@
 set -e
 
 testAlias+=(
-	[jumpcoind:trusty]='bitcoind'
+	[jumpcoind:trusty]='jumpcoind'
 )
 
 imageTests+=(

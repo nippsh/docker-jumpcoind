@@ -4,7 +4,7 @@
 #
 set -ex
 
-BTC_IMAGE=${BTC_IMAGE:-kylemanna/bitcoind}
+JUMP_IMAGE=${JUMP_IMAGE:-nippsh/jumpcoind}
 
 distro=$1
 shift
@@ -35,23 +35,23 @@ if [ "$distro" = "trusty" -o "$distro" = "ubuntu:14.04" ]; then
 fi
 
 # Always clean-up, but fail successfully
-docker kill bitcoind-node 2>/dev/null || true
-docker rm bitcoind-node 2>/dev/null || true
-stop docker-bitcoind 2>/dev/null || true
+docker kill jumpcoind-node 2>/dev/null || true
+docker rm jumpcoind-node 2>/dev/null || true
+stop docker-jumpcoind 2>/dev/null || true
 
 # Always pull remote images to avoid caching issues
-if [ -z "${BTC_IMAGE##*/*}" ]; then
-    docker pull $BTC_IMAGE
+if [ -z "${JUMP_IMAGE##*/*}" ]; then
+    docker pull $JUMP_IMAGE
 fi
 
 # Initialize the data container
-docker volume create --name=bitcoind-data
-docker run -v jumpcoind-data:/bitcoin --rm $BTC_IMAGE btc_init
+docker volume create --name=jumpcoind-data
+docker run -v jumpcoind-data:/jumpcoin --rm $JUMP_IMAGE jump_init
 
 # Start bitcoind via upstart and docker
-curl https://raw.githubusercontent.com/kylemanna/docker-bitcoind/master/upstart.init > /etc/init/docker-bitcoind.conf
+curl https://raw.githubusercontent.com/nippsh/docker-jumpcoind/master/upstart.init > /etc/init/docker-jumpcoind.conf
 start docker-jumpcoind
 
 set +ex
-echo "Resulting bitcoin.conf:"
-docker run -v bitcoind-data:/bitcoin --rm $BTC_IMAGE cat /bitcoin/.bitcoin/bitcoin.conf
+echo "Resulting jumpcoin.conf:"
+docker run -v jumpcoind-data:/jumpcoin --rm $JUMP_IMAGE cat /jumpcoin/.jumpcoin/jumpcoin.conf
