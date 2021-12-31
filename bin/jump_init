@@ -11,10 +11,19 @@ if [ ! -e "$HOME/.jumpcoin/jumpcoin.conf" ]; then
 
     # Seed a random password for JSON RPC server
     cat <<EOF > $HOME/.jumpcoin/jumpcoin.conf
-disablewallet=${DISABLEWALLET:-1}
+addnode=173.212.252.127
+addnode=173.212.248.219
+addnode=173.249.46.190
+server=1    
+txindex=1
+listen=1
+enableaccounts=1
+staking=0
 printtoconsole=${PRINTTOCONSOLE:-1}
 rpcuser=${RPCUSER:-jumpcoinrpc}
 rpcpassword=${RPCPASSWORD:-`dd if=/dev/urandom bs=33 count=1 2>/dev/null | base64`}
+rpcport=${RPCPORT:-31551}
+maxconnections=12
 EOF
 
 fi
