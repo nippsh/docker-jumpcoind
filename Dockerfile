@@ -21,7 +21,7 @@ RUN mkdir .jumpcoin \
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 ENV HOME /jumpcoin
-EXPOSE 31550 31551
+EXPOSE 31240 31242
 VOLUME ["/jumpcoin/.jumpcoin"]
 
 ARG GROUP_ID=1000
