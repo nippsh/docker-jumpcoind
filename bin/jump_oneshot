@@ -9,8 +9,8 @@ jump_init
 # Docker port proxying or Docker private networking.
 if [ $# -eq 0 ]; then
     # If IPv6 is in the container do both:
-    #set -- '-rpcbind=[::]:31550' '-rpcallowip=::/0' '-rpcallowip=0.0.0.0/0'
-    set -- '-rpcbind=:31550' '-rpcallowip=0.0.0.0/0'
+    #set -- '-rpcbind=[::]:31240' '-rpcallowip=::/0' '-rpcallowip=0.0.0.0/0'
+    set -- '-rpcbind=:31240' '-rpcallowip=0.0.0.0/0'
 fi
 
 ls
