@@ -11,5 +11,5 @@ pre-start script
   docker pull nippsh/jumpcoind || true
 end script
 script
-  exec docker run --rm -v jumpcoind-data:/jumpcoin --name=jumpcoind-node --rm -p 31240:31240 -p 127.0.0.1:31242:31242 nippsh/jumpcoind
+  exec docker run --rm -v jumpcoind-data:/jumpcoin --name=jumpcoind-node --rm -p 31242:31242 -p 127.0.0.1:31240:31240 nippsh/jumpcoind
 end script
