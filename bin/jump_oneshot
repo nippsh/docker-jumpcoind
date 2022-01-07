@@ -7,12 +7,11 @@ jump_init
 
 # Default / no argument invocation listens for RPC commands and has to accept non-localhost because of
 # Docker port proxying or Docker private networking.
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ]; then  
+    # jumpcoind is currently based on an old bitcoin core version (before 0.10.0) so instead of =0.0.0.0/0 use =* 
     # If IPv6 is in the container do both:
-    #set -- '-rpcbind=[::]:31240' '-rpcallowip=::/0' '-rpcallowip=0.0.0.0/0'
-    set -- '-rpcbind=:31240' '-rpcallowip=0.0.0.0/0'
+    #set -- '-rpcbind=[::]:31240' '-rpcallowip=::/0' '-rpcallowip=*'
+    set -- '-rpcbind=:31240' '-rpcallowip=*'
 fi
-
-ls
 
 exec ./jumpcoind "$@"
